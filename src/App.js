@@ -3,6 +3,7 @@ import './App.css';
 
 
 import LoginSocial from './components/LoginSocial';
+import SignInSide from './components/LoginSocial';
 
 
 class App extends Component {
@@ -10,7 +11,8 @@ class App extends Component {
 
     return (
       <div className="App">
-          <LoginSocial />
+          
+           <SignInSide />
       </div>
 
     );
