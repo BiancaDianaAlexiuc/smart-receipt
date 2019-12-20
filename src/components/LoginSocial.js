@@ -128,6 +128,7 @@ export default function SignInSide(props) {
                     fields="name,email,picture"
                     onClick={componentClicked}
                     callback={responseFacebook}
+                    // autoLoad={true}
                     cssClass="loginBtn loginBtn--facebook"/>
                 </Grid>
 
