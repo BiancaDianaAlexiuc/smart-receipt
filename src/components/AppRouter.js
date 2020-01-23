@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import NotFoundPage from './NotFoundPage';
 import Header from './Header';
-import Home from './Home';
+import HomePage from './homepage/Home';
 import ContactPage from './ContactPage';
 import Dashboard from './dashboard/DashboardPage';
+import ReceiptsPage from './ReceiptsPage';
 import AuthApi from './AuthApi';
 
 const AppRouter = () => {
@@ -14,9 +15,10 @@ const AppRouter = () => {
             <div>
                 <Header />
                 <Switch>
-                    <ProtectedRoute path="/" component={Home} exact={true} auth={Auth.auth} />
+                    <Route path="/home" component={HomePage} exact={true} auth={Auth.auth} />
                     <Route path="/contact" component={ContactPage} />
                     <Route path="/dashboard" component={Dashboard} />
+                    <Route path="/receipts" component={ReceiptsPage} />
                     <Route component={NotFoundPage} />
 
                 </Switch>
@@ -33,7 +35,7 @@ const ProtectedRoute = ({auth, component:Component, ...rest}) => {
             <Component/>
         ):
         (
-            <Redirect to="/"/>
+            <Redirect to="/home"/>
         )
         }
         />

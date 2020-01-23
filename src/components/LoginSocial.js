@@ -15,7 +15,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Cookies from 'js-cookie';
 import AuthApi from './AuthApi';
-
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import ContactPage from './ContactPage';
 
 function Copyright() {
   return (
@@ -58,6 +63,34 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  card: {
+    minWidth: 275,
+    width: 200
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    height: '100vh',
+    overflow: 'auto',
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  large: {
+    width: 60,
+    height: 60,
+    margin: '0 auto',
+    marginBottom: 10
   },
 }));
 
@@ -149,21 +182,36 @@ export default function SignInSide(props) {
 
    const classes = useStyles();
 
-   const Welcome = () => (
-    <div>
-        <AuthApi.Provider value={{isAuthenticated, setAuthentificated}}>
-          <AppRouter />
-        </AuthApi.Provider>
-        <p>Authenticated</p>
-        <div >
-            <img src={picture}  alt={name} />
-            <img src={googlePicture} alt={googleUsername} />
-            <h2>Welcome {name} {googleUsername}</h2>
+  const Welcome = () => ( 
+    <div className={classes.root}>
+    <AuthApi.Provider value={{isAuthenticated, setAuthentificated}}>
+        <AppRouter />
+    </AuthApi.Provider>
+      <CssBaseline />
+  <main className={classes.content}>
+    <div className={classes.appBarSpacer} />
+    <Container maxWidth="lg" className={classes.container}>
+    <Card className={classes.card}>
+      <CardContent>
+        <Avatar src={picture || googlePicture}  alt={name || googleUsername} className={classes.large} />
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+          Authenticated
+        </Typography>
+        <Typography className={classes.pos} color="textSecondary">
+          Welcome {name} {googleUsername}
+        </Typography>
+        <Typography variant="body2" component="p">
             Email: {email} {googleEmail}
-        </div>
-        <button onClick={Logout}>Logout</button>
-
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small" onClick={Logout}>Logout</Button>
+      </CardActions>
+    </Card>
+    </Container>
+      </main>
     </div>
+
    );
 
    const Loginpart = () => (
